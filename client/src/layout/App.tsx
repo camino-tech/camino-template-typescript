@@ -1,17 +1,19 @@
 import React from 'react';
 import '../styles/App.css';
-import SecondComponent from '../components/SecondComponent';
-import StarterComponent from '../components/StarterComponent';
-import Person from '../components/person/Person';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from 'react-router-dom';
+import Home from '../pages/Home/Home';
 
 function App() {
-
   return (
-    <div className="App">
-      <StarterComponent/>
-      <SecondComponent/>
-      <Person name='Billy' age={15} likes='idk'/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
