@@ -3,7 +3,7 @@ import React from 'react';
 const StarterComponent = () => {
     return (
         <>
-            <h1>title</h1>
+            <h1>Template</h1>
         </>
     );
 }
