@@ -1,9 +1,32 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { Form, Button } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
+import { createGoal } from '../features/goals/goalSlice'
 
 function GoalForm() {
+
+  const [text, setText] = useState('')
+
+  const dispatch = useDispatch()
+
+  const onSubmit = (e:any) => {
+    e.preventDefault()
+
+    // @ts-ignore
+    dispatch(createGoal({text}))
+    setText('')
+  }
+
   return (
-    <div>GoalForm</div>
+    <>
+      <Form onSubmit={onSubmit}>
+        <Form.Group className='mb-3' controlId='GoalFormGoal'>
+          <Form.Label>Goal</Form.Label>
+          <Form.Control type='text' placeholder='Please enter a goal' name ='goal' value={text} onChange={(e) => setText(e.target.value)} />
+        </Form.Group>
+        <Button type='submit' variant='primary'>Add Goal</Button>
+      </Form>
+    </>
   )
 }
 
