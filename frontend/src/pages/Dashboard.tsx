@@ -17,7 +17,9 @@ function Dashboard() {
   // @ts-ignore
   const { user } = useSelector((state) => state.auth)
   // @ts-ignore
-  const { goals, isLoading, isError, message } = useSelector((state) => state.goals)
+  const { isLoading, isError, message } = useSelector((state) => state.goals)
+
+  // const { goals, isLoading, isError, message } = useSelector((state) => state.goals)
 
   useEffect(() => {
     if (isError) {
