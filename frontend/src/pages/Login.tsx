@@ -4,6 +4,11 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { login, reset } from '../features/auth/authSlice'
+import Spinner from '../components/Spinner';
 
 function Login() {
 
@@ -14,6 +19,25 @@ function Login() {
 
   const { email, password } = formData
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  // @ts-ignore
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
+    }
+
+    if (isSuccess || user) {
+      navigate('/')
+    }
+
+    dispatch(reset())
+
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
   const onChange = (e:any) => {
     setFormData((previousState) => ({
       ...previousState,
@@ -23,6 +47,18 @@ function Login() {
 
   const onSubmit = (e:any) => {
     e.preventDefault()
+
+    const userData = {
+      email,
+      password
+    }
+
+    // @ts-ignore
+    dispatch(login(userData))
+  }
+
+  if (isLoading) {
+    return <Spinner />
   }
 
   return (
