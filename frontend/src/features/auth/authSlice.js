@@ -4,6 +4,10 @@ import authService from "./authService";
 // get user from localStorage
 const user = JSON.parse(localStorage.getItem('user'));
 
+// this file contains actions (something that will be called)
+// these actions call the reducers that actually deal with the logic / make api calls
+
+// this is the initial state for auth
 const initialState = {
   user: user ? user : null,
   isError: false,
