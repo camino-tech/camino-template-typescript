@@ -7,6 +7,7 @@ import { Row } from 'react-bootstrap'
 import Spinner from '../components/Spinner'
 import { getGoals } from '../features/goals/goalSlice'
 import { reset } from '../features/auth/authSlice'
+import GoalItem from '../components/GoalItem'
 
 
 function Dashboard() {
@@ -17,9 +18,7 @@ function Dashboard() {
   // @ts-ignore
   const { user } = useSelector((state) => state.auth)
   // @ts-ignore
-  const { isLoading, isError, message } = useSelector((state) => state.goals)
-
-  // const { goals, isLoading, isError, message } = useSelector((state) => state.goals)
+  const { goals, isLoading, isError, message } = useSelector((state) => state.goals)
 
   useEffect(() => {
     if (isError) {
@@ -51,8 +50,25 @@ function Dashboard() {
             <p>Goals Dashboard</p>
           </section>
         </Row>
+        {/* Goal form */}
         <Row>
           <GoalForm />
+        </Row>
+        {/* Show current goals */}
+        <Row>
+          <section className='goals-container'>
+            <Container>
+                {
+                  goals.length > 0 ? (
+                    <div>
+                      {goals.map((goal: any) => (
+                        <GoalItem key={goal._id} goal={goal} />
+                      ))}
+                    </div>
+                  ) : (<h3>You have not set any goals</h3>)
+                }
+            </Container>
+          </section>
         </Row>
       </Container>
     </div>
