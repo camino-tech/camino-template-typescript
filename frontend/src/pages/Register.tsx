@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Container from 'react-bootstrap/Container';
@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { register, reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks'
 
 function Register() {
 
@@ -22,10 +23,9 @@ function Register() {
   const { name, email, password, password2 } = formData
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  // @ts-ignore
-  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector((state) => state.auth)
 
   useEffect(() => {
     if (isError) {

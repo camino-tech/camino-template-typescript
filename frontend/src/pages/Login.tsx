@@ -4,11 +4,12 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { useSelector, useDispatch } from 'react-redux'
+// import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { login, reset } from '../features/auth/authSlice'
 import Spinner from '../components/Spinner';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks'
 
 function Login() {
 
@@ -20,10 +21,9 @@ function Login() {
   const { email, password } = formData
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  // @ts-ignore
-  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector((state) => state.auth)
 
   useEffect(() => {
     if (isError) {

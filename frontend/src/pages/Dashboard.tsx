@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+// import { useSelector, useDispatch } from 'react-redux'
 import GoalForm from '../components/GoalForm'
 import Container from 'react-bootstrap/Container'
 import { Row } from 'react-bootstrap'
@@ -8,17 +8,16 @@ import Spinner from '../components/Spinner'
 import { getGoals } from '../features/goals/goalSlice'
 import { reset } from '../features/auth/authSlice'
 import GoalItem from '../components/GoalItem'
+import { useAppDispatch, useAppSelector } from '../hooks/hooks'
 
 
 function Dashboard() {
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   
-  // @ts-ignore
-  const { user } = useSelector((state) => state.auth)
-  // @ts-ignore
-  const { goals, isLoading, isError, message } = useSelector((state) => state.goals)
+  const { user } = useAppSelector((state) => state.auth)
+  const { goals, isLoading, isError, message } = useAppSelector((state) => state.goals)
 
   useEffect(() => {
     if (isError) {
@@ -28,8 +27,7 @@ function Dashboard() {
     if (!user) {
       navigate('/login')
     }
-    
-    // @ts-ignore
+
     dispatch(getGoals())
 
     return () => {
