@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
 import { createGoal } from '../features/goals/goalSlice'
+import { useAppDispatch } from '../hooks/hooks'
 
 function GoalForm() {
 
   const [text, setText] = useState('')
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const onSubmit = (e:any) => {
     e.preventDefault()
-
     // @ts-ignore
     dispatch(createGoal({text}))
     setText('')

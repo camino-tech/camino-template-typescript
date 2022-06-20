@@ -4,18 +4,17 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+// import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
-
+import { useAppDispatch, useAppSelector } from '../hooks/hooks'
 
 function Header() {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-  // @ts-ignore
-  const { user } = useSelector((state) => state.auth)
+  const dispatch = useAppDispatch()
+
+  const { user } = useAppSelector((state) => state.auth)
 
   const onLogout = () => {
-    // @ts-ignore
     dispatch(logout())
     dispatch(reset())
     navigate('/')
